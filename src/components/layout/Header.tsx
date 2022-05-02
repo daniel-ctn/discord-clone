@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import { MenuIcon } from '@heroicons/react/solid'
 
 import { auth } from 'config/firebase.js'
@@ -7,6 +7,7 @@ import logo from 'assests/Discord-Logo+Wordmark-White.svg'
 
 const Header: FC = () => {
   const [user] = useAuthState(auth)
+  const [signInWithGoogle] = useSignInWithGoogle(auth)
 
   return (
     <header className="flex items-center justify-between bg-discord_blue px-6 md:px-12 lg:px-24">
@@ -34,7 +35,12 @@ const Header: FC = () => {
         </a>
       </nav>
       <div className="flex items-center space-x-4">
-        <button className="button__white">Login to Discord</button>
+        {!user && (
+          <button className="button__white" onClick={() => signInWithGoogle()}>Login to Discord</button>
+        )}
+        {user && (
+          <img src={user?.photoURL || ''} alt="user's avatar" className="rounded-full w-12 h-12"/>
+        )}
         <MenuIcon className="inline h-8 w-8 text-white lg:hidden" />
       </div>
     </header>
