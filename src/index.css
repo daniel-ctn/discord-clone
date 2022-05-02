@@ -8,7 +8,7 @@
     }
 
     .button__white {
-        @apply cursor-pointer rounded-2xl bg-white px-6 py-2 text-lg font-semibold
+        @apply cursor-pointer rounded-full bg-white px-6 py-2 text-lg font-semibold
         text-gray-700 hover:bg-gray-300 focus:outline-none hover:text-discord_purple
         transition duration-200 ease-in-out whitespace-nowrap font-medium
     }
